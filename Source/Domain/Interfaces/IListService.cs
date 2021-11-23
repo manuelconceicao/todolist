@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using todoListBackEnd.Source.Domain.TodoListContext.Entity;
-using todoListBackEnd.Source.Domain.TodoListContext.VO;
+using todoListBackEnd.Source.Domain.TodoListContext;
+using todoListBackEnd.Source.Infrasctructure;
 
 namespace todoListBackEnd.Source.Domain.InternalServices.Interfaces
 {
     interface IListService
     {
         TodoList CreateList(string titleString);
-        //Task<Todo> AddTodo(Title title, List<Todo> todos, CreationDate date);
+        Todo CreateTodo(string text);
+        // Implement a GetAllLists
+        List<TodoListLog>GetAllLists();
+        //TodoList GetList(string idList);
+        List<TodoListLog> GetListsByName(string titleSearch);
 
     }
 }

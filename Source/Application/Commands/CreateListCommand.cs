@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using todoListBackEnd.Source.Application.DTOs;
 using todoListBackEnd.Source.Domain.InternalServices;
 using todoListBackEnd.Source.Domain.InternalServices.Interfaces;
-using todoListBackEnd.Source.Domain.TodoListContext.Entity;
-using todoListBackEnd.Source.Domain.TodoListContext.VO;
+using todoListBackEnd.Source.Domain.TodoListContext;
+using todoListBackEnd.Source.Infrasctructure;
+using todoListBackEnd.Source.Infrasctructure.Persistence;
 
 namespace todoListBackEnd.Source.Application.Commands
 {
@@ -14,6 +15,7 @@ namespace todoListBackEnd.Source.Application.Commands
     {
         // Implement interface of ListService
         IListService iListService = new ListService();
+        Db db = new Db();
 
         public CreateListCommand()
         {
@@ -28,9 +30,19 @@ namespace todoListBackEnd.Source.Application.Commands
             TodoList todoList = iListService.CreateList(title);
 
             // Save todoList database
+            //Save here to DB
+            db.CreateList(
+                todoList.id.guid.ToString(),
+                todoList.title.titleStr,
+                todoList.date.creationDate.ToString("yyyy-MM-dd HH:mm:ss.fff") // defines format for string
+            );
 
-            // Convert List<Todo> to List<string> to be used in DTO response
+
+            // Prepare and return response DTO (This should be in a mapper to be called here)
+            // Convert List<Todo> to List<string> to be used in DTO response. This is supposed to be in a DTO mapper
             List<Todo> todos = new List<Todo>();
+
+            //db.getListTodos para colocar no dto
 
             foreach (Todo todo in todoList.todos)
             {

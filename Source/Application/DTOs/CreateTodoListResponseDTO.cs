@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using todoListBackEnd.Source.Domain.TodoListContext.VO;
+using todoListBackEnd.Source.Domain.TodoListContext;
 
 namespace todoListBackEnd.Source.Application.DTOs
 {
